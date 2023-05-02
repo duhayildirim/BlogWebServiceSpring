@@ -11,7 +11,7 @@ public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     @PostMapping("/api/1.0/users")
-    public void createUser(@RequestBody String body) {
-        log.info(body);
+    public void createUser(@RequestBody User user) {
+        log.info(user.toString());
     }
 }
