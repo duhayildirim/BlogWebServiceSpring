@@ -17,25 +17,31 @@ import java.util.Map;
 @RestController
 public class UserController {
 
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
-
     @Autowired
     UserService userService;
 
     @PostMapping("/api/1.0/users")
     public ResponseEntity<?> createUser(@RequestBody User user) {
+
+        ApiError error = new ApiError(400, "Validation error", "/api/1.0/users");
+        Map<String, String> validationErrors = new HashMap<>();
         String username = user.getUsername();
+        String email = user.getEmail();
+
         if (username == null || username.isEmpty()) {
-            ApiError error = new ApiError(400, "Validation error", "/api/1.0/users");
-            
-            Map<String, String> validationErrors = new HashMap<>();
             validationErrors.put("username", "Username cannot be null");
+        }
+        if (email == null || email.isEmpty()) {
+            validationErrors.put("email", "Email cannot be null");
+        }
+
+        if (validationErrors.size() > 0) {
             error.setValidationErrors(validationErrors);
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
         }
+
         userService.save(user);
-        log.info(user.toString());
 
         return ResponseEntity.ok(new GenericResponse("User created."));
     }
