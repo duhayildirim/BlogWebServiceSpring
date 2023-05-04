@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -17,11 +19,14 @@ public class User {
     private long id;
 
     @NotNull
+    @Size(min = 4,max = 36)
     private String username;
 
     @NotNull
     private String email;
 
-
+    @NotNull
+    @Size(min = 6,max = 36)
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
     private String password;
 }
