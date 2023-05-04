@@ -20,11 +20,13 @@ public class User {
     private long id;
 
     @NotNull
-    @Size(min = 4,max = 36)
+    @Size(min = 4, max = 36)
+    @UniqueUsername
     private String username;
 
     @NotNull
     @Email
+    @UniqueEmail
     private String email;
 
     @NotNull
