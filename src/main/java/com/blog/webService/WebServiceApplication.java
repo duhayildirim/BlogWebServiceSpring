@@ -12,23 +12,19 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class WebServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WebServiceApplication.class, args);
+    }
 
-	@Bean
-	CommandLineRunner createInitialUsers(UserService userService) {
-		return new CommandLineRunner() {
-			@Override
-			public void run(String... args) throws Exception {
-				User user = new User();
-				user.setUsername("duha");
-				user.setEmail("duha@gmail.com");
-				user.setPassword("Duha123.");
+    @Bean
+    CommandLineRunner createInitialUsers(UserService userService) {
+        return (args) -> {
+            User user = new User();
+            user.setUsername("duha");
+            user.setEmail("duha@gmail.com");
+            user.setPassword("Duha123.");
 
-				userService.save(user);
-			}
-		};
-	}
-
+            userService.save(user);
+        };
+    }
 }
