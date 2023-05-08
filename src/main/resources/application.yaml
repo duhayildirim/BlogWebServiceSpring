@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:./devdb
+    url: jdbc:h2:mem:test_mem
     username: sa
   jpa:
     hibernate:
