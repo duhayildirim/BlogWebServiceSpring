@@ -31,6 +31,6 @@ public class User {
 
     @NotNull
     @Size(min = 4)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Lower case, upper case and numbers should be used.")
     private String password;
 }
