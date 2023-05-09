@@ -36,6 +36,7 @@ public class User {
     @NotNull
     @Size(min = 4)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Lower case, upper case and numbers should be used.")
+    @JsonView(Views.Sensitive.class)
     private String password;
 
     @JsonView(Views.Base.class)
