@@ -1,5 +1,7 @@
 package com.blog.webService.user;
 
+import com.blog.webService.shared.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,15 +24,20 @@ public class User {
     @NotNull
     @Size(min = 4, max = 36)
     @UniqueUsername
+    @JsonView(Views.Base.class)
     private String username;
 
     @NotNull
     @Email
     @UniqueEmail
+    @JsonView(Views.Base.class)
     private String email;
 
     @NotNull
     @Size(min = 4)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Lower case, upper case and numbers should be used.")
     private String password;
+
+    @JsonView(Views.Base.class)
+    private String image;
 }
