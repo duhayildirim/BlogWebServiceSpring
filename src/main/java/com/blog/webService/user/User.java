@@ -21,20 +21,20 @@ public class User {
     @GeneratedValue
     private long id;
 
-    @NotNull
-    @Size(min = 4, max = 36)
-    @UniqueUsername
+    @NotNull(message = "cannot be null")
+    @Size(min = 4, max = 36, message = "Minimum of 4 characters required")
+    @UniqueUsername(message = "Already registered with this username")
     @JsonView(Views.Base.class)
     private String username;
 
-    @NotNull
-    @Email
-    @UniqueEmail
+    @NotNull(message = "cannot be null")
+    @Email(message = "not a proper e-mail address spelling")
+    @UniqueEmail(message = "Already registered with this e-mail")
     @JsonView(Views.Base.class)
     private String email;
 
-    @NotNull
-    @Size(min = 4)
+    @NotNull(message = "cannot be null")
+    @Size(min = 4, message = "Minimum of 4 characters required")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "Lower case, upper case and numbers should be used.")
     @JsonView(Views.Sensitive.class)
     private String password;
